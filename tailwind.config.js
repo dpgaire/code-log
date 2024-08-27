@@ -1,16 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  content: ["./src/**/*.{html,js}"],
   theme: {
     extend: {
       fontFamily: {
         sans: ["var(--font-family-sans)"],
         serif: ["var(--font-family-serif)"],
         mono: ["var(--font-family-mono)"],
-      },
-      fontSize: {
-        base: "var(--font-size-base)",
-        lg: "var(--font-size-lg)",
-        xl: "var(--font-size-xl)",
       },
       colors: {
         primary: "var(--color-primary)",
