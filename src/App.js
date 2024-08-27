@@ -1,13 +1,13 @@
 import React from "react";
-import { Header } from "./components";
+import { MainLayout } from "./layout";
 
 const App = () => {
   return (
-    <div>
-      <Header />
-      {/* <InputField/> */}
-      {/* <CodePreviewCard/> */}
-    </div>
+    <MainLayout>
+      <div className="flex justify-center items-center h-full">
+        <h1 className="text-primary">Let's start a new coding!</h1>
+      </div>
+    </MainLayout>
   );
 };
 
