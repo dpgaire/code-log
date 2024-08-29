@@ -1,4 +1,5 @@
 import Header from "./Header";
 import Footer from "./Footer";
+import CodePreviewCard from "./CodePreviewCard";
 
-export { Header, Footer };
+export { Header, Footer, CodePreviewCard };

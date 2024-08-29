@@ -1,0 +1,51 @@
+[{
+        "title": "Array Methods",
+        "description": "A brief overview of common array methods in JavaScript.",
+        "codeSnippet": "const numbers = [1, 2, 3, 4];\nconst doubled = numbers.map(num => num * 2);\nconsole.log(doubled);"
+    },
+    {
+        "title": "Async/Await",
+        "description": "Using async/await for asynchronous operations.",
+        "codeSnippet": "const fetchData = async () => {\n  const response = await fetch('https://api.example.com/data');\n  const data = await response.json();\n  console.log(data);\n};\nfetchData();"
+    },
+    {
+        "title": "Event Handling",
+        "description": "Handling events in a React component.",
+        "codeSnippet": "const handleClick = () => {\n  alert('Button clicked!');\n};\n\n<button onClick={handleClick}>Click Me</button>;"
+    },
+    {
+        "title": "Destructuring",
+        "description": "Using destructuring to extract values from objects and arrays.",
+        "codeSnippet": "const user = { name: 'Alice', age: 30 };\nconst { name, age } = user;\nconsole.log(name, age);"
+    },
+    {
+        "title": "Conditional Rendering",
+        "description": "Rendering components conditionally based on props or state.",
+        "codeSnippet": "const ConditionalComponent = ({ isVisible }) => (\n  {isVisible ? <div>Visible</div> : <div>Not Visible</div>}\n);"
+    },
+    {
+        "title": "Custom Hooks",
+        "description": "Creating and using custom hooks in React.",
+        "codeSnippet": "import { useState, useEffect } from 'react';\n\nconst useCustomHook = () => {\n  const [data, setData] = useState(null);\n  useEffect(() => {\n    fetch('/api/data')\n      .then(response => response.json())\n      .then(data => setData(data));\n  }, []);\n  return data;\n};"
+    },
+    {
+        "title": "Form Handling",
+        "description": "Handling form submissions in React.",
+        "codeSnippet": "const handleSubmit = (event) => {\n  event.preventDefault();\n  const formData = new FormData(event.target);\n  console.log(Object.fromEntries(formData.entries()));\n};\n\n<form onSubmit={handleSubmit}>\n  <input name='name' />\n  <button type='submit'>Submit</button>\n</form>"
+    },
+    {
+        "title": "Context API",
+        "description": "Using React Context API for state management.",
+        "codeSnippet": "const MyContext = React.createContext();\n\nconst ProviderComponent = ({ children }) => {\n  const [state, setState] = useState('value');\n  return <MyContext.Provider value={{ state, setState }}>{children}</MyContext.Provider>;\n};"
+    },
+    {
+        "title": "Memoization",
+        "description": "Optimizing performance with React memoization techniques.",
+        "codeSnippet": "import React, { memo } from 'react';\n\nconst ExpensiveComponent = memo(({ data }) => {\n  // expensive calculations here\n  return <div>{data}</div>;\n});"
+    },
+    {
+        "title": "Error Boundaries",
+        "description": "Implementing error boundaries to catch JavaScript errors.",
+        "codeSnippet": "class ErrorBoundary extends React.Component {\n  constructor(props) {\n    super(props);\n    this.state = { hasError: false };\n  }\n  static getDerivedStateFromError() {\n    return { hasError: true };\n  }\n  componentDidCatch(error, errorInfo) {\n    console.error(error, errorInfo);\n  }\n  render() {\n    if (this.state.hasError) {\n      return <h1>Something went wrong.</h1>;\n    }\n    return this.props.children;\n  }\n}"
+    }
+]
