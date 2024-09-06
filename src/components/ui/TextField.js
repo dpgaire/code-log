@@ -3,22 +3,27 @@ import PropTypes from "prop-types";
 
 const TextField = ({
   type = "text",
-  placeholder = "Enter text here",
+  placeholder,
+  name,
+  value,
+  onChange,
+  onBlur,
   error,
   style,
-  ...props
 }) => {
   return (
     <div style={style} className="flex flex-col space-y-2">
       <input
-        type={type}
+        name={name}
+        value={value}
         placeholder={placeholder}
-        className={` p-2 w-full border-DEFAULT focus:focus text-lg rounded-lg shadow-sm transition duration-150 ease-in-out  ${
-          error ? "border-red-500" : ""
+        onChange={onChange}
+        onBlur={onBlur}
+        className={` p-2 w-full outline-none rounded-lg sm:w-auto focus:outline-none focus:dark:bg-gray-50 focus:dark:border-sky-600 focus:focus text-lg  transition duration-150 ease-in-out  ${
+          error ? "border-red-500" : "border-DEFAULT"
         }`}
-        {...props}
       />
-      {error && <p className="text-red-500 text-sm">{error}</p>}
+      {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
     </div>
   );
 };
@@ -26,11 +31,11 @@ const TextField = ({
 TextField.propTypes = {
   type: PropTypes.string,
   placeholder: PropTypes.string,
-  label: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  value: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func.isRequired,
   error: PropTypes.string,
-  borderColor: PropTypes.string,
-  focusBorderColor: PropTypes.string,
-  focusRingColor: PropTypes.string,
 };
 
 export default TextField;

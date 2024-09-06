@@ -1,5 +1,13 @@
-import Header from "./Header";
-import Footer from "./Footer";
 import CodePreviewCard from "./CodePreviewCard";
+import DynamicForm from "./DynamicForm";
+import NoDataFound from "./NoDataFound";
+import DeleteConfirmation from "./DeleteConfirmation";
+import AddCode from "./code/AddCode";
 
-export { Header, Footer, CodePreviewCard };
+export {
+  CodePreviewCard,
+  DynamicForm,
+  NoDataFound,
+  DeleteConfirmation,
+  AddCode,
+};
