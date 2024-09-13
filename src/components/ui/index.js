@@ -4,5 +4,6 @@ import SelectField from "./SelectField";
 import TextArea from "./TextArea";
 import TextField from "./TextField";
 import IconButton from "./IconButton";
+import Card from "./Card";
 
-export { Button, Modal, SelectField, TextArea, TextField, IconButton };
+export { Button, Modal, SelectField, TextArea, TextField, IconButton, Card };

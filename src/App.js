@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { MainLayout } from "./layout";
-import { IconButton, Modal, TextField } from "./components/ui";
+import { Card, IconButton, Modal, TextField } from "./components/ui";
 import {
   AddCode,
   CodePreviewCard,
@@ -87,7 +87,7 @@ const App = () => {
   return (
     <MainLayout>
       <section className="p-4">
-        <div className="flex flex-wrap my-4 gap-2 items-center">
+        <div className="flex flex-wrap my-2 gap-2 items-center">
           <TextField style={{ flex: 1 }} type="text" placeholder="Search..." />
           <IconButton
             className={` text-white bg-primary py-4 px-4 hover:scale-105 rounded-full`}
@@ -96,11 +96,11 @@ const App = () => {
             onClick={addToggle}
           />
         </div>
-        <div className="p-4">
+        <div className="">
           {data.length === 0 ? (
             <NoDataFound message="No data at the moments do you want to add." />
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 my-4 py-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 my-4 py-2">
               {data.map((item) => (
                 <CodePreviewCard
                   key={item.id}
@@ -147,12 +147,7 @@ const App = () => {
             onClose={detailsResetOpen}
             title="Code Preview"
           >
-            <CodePreviewComponent
-              // data={getDetails(detailId)}
-              title={"ittle"}
-              description={"fhsdf s"}
-              codeSnippet="import { useState, useEffect } from 'react';\n\nconst useCustomHook = () => {\n  const [data, setData] = useState(null);\n  useEffect(() => {\n    fetch('/api/data')\n      .then(response => response.json())\n      .then(data => setData(data));\n  }, []);\n  return data;\n};"
-            />
+            <CodePreviewComponent data={getDetails(detailId)} />
           </Modal>
         </div>
         {/* <AddCode addData={addData} /> */}

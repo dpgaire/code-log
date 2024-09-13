@@ -85,7 +85,12 @@ const DynamicForm = ({
 
     switch (field.fieldType) {
       case "textarea":
-        return <TextArea {...commonProps} />;
+        return (
+          <TextArea
+            {...commonProps}
+            style={{ fontFamily: "monospace", whiteSpace: "pre-wrap" }}
+          />
+        );
       case "select":
         return <SelectField {...commonProps} options={field.options} />;
       default:

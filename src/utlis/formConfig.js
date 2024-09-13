@@ -21,7 +21,7 @@ const formConfig = [
     label: "Code",
     placeholder: "Enter code",
     type: "text",
-    fieldType: "input",
+    fieldType: "textarea",
     required: true,
   },
 ];

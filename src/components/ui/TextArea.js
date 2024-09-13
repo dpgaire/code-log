@@ -1,13 +1,24 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const TextArea = ({ placeholder, name, value, onChange, onBlur, error }) => {
+const TextArea = ({
+  placeholder,
+  name,
+  value,
+  onChange,
+  onBlur,
+  error,
+  style,
+}) => {
   return (
     <div className="flex flex-col">
       <textarea
         placeholder={placeholder}
         name={name}
+        style={style}
         value={value}
+        rows="5"
+        cols="50"
         onChange={onChange}
         onBlur={onBlur}
         className={`p-2 w-full border-DEFAULT focus:focus text-lg rounded-lg shadow-sm transition duration-150 ease-in-out ${

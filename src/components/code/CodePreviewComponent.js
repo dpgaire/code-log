@@ -1,11 +1,15 @@
-import React from "react";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { solarizedlight } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { FaCopy } from "react-icons/fa";
-import { IconButton } from "../ui";
+import React, { useState } from "react";
+// import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import SyntaxHighlighter from "react-syntax-highlighter";
+import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 const CodePreviewComponent = (data) => {
+  const [isCopied, setIsCopied] = useState(false);
+  const { title, description, codeSnippet } = data.data;
+  console.log("data on preview", data);
+
   const handleCopy = () => {
+    setIsCopied(true);
     navigator.clipboard
       .writeText(data.codeSnippet)
       .then(() => alert("Code copied to clipboard!"))
@@ -13,29 +17,42 @@ const CodePreviewComponent = (data) => {
   };
 
   return (
-    <div className="bg-white shadow-lg rounded-lg border border-gray-300 overflow-hidden max-w-4xl mx-auto my-4">
-      {/* Header */}
-      <div className="bg-primary p-4 flex items-center justify-between">
-        <h2 className="text-xl font-semibold text-white">{data.title}</h2>
-        <IconButton
-          icon={FaCopy}
-          title="Copy Code"
-          className="text-white bg-blue-600 hover:bg-blue-700"
-          onClick={handleCopy}
-        />
+    <div className="bg-white rounded-lg shadow-xl border border-gray-300 min-h-[300px] max-h-[700px] flex flex-col transition-transform transform  hover:shadow-2xl duration-300">
+      <div className="flex rounded-t-lg justify-between items-center px-4 py-1 text-white text-xs bg-primary">
+        <p className="text-lg font-bold">{title}</p>
+        {isCopied ? (
+          <button
+            onClick={handleCopy}
+            className="py-1 bg-transparent text-white font-bold cursor-pointer border-none outline-none inline-flex items-center justify-center gap-1 "
+          >
+            <span className="text-base mt-1">
+              <ion-icon name="checkmark-sharp"></ion-icon>
+            </span>
+            Copied!
+          </button>
+        ) : (
+          <button
+            onClick={handleCopy}
+            className="py-1 bg-transparent text-white font-bold cursor-pointer border-none outline-none inline-flex items-center justify-center gap-1 "
+          >
+            <span className="text-base mt-1">
+              <ion-icon name="clipboard-outline"></ion-icon>
+            </span>
+            Copy code
+          </button>
+        )}
       </div>
+      <SyntaxHighlighter
+        language="jsx"
+        style={atomOneDark}
+        customStyle={{ padding: "25px" }}
+        wrapLongLines={true}
+      >
+        {`${codeSnippet}`}
+      </SyntaxHighlighter>
 
-      {/* Content */}
-      <div className="p-4">
-        {/* Description */}
-        <p className="text-gray-700 mb-4">{data.description}</p>
-
-        {/* Code Snippet */}
-        <div className="bg-gray-900 rounded-md p-4">
-          <SyntaxHighlighter language="javascript" style={solarizedlight}>
-            {data.codeSnippet}
-          </SyntaxHighlighter>
-        </div>
+      <div className="p-4 border-t  border-gray-200  ">
+        <p className="text-grey-200 text-sm">{description}</p>
       </div>
     </div>
   );

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { FiClipboard, FiEdit, FiTrash, FiEye } from "react-icons/fi";
 import { IconButton } from "./ui";
+import SyntaxHighlighter from "react-syntax-highlighter";
+import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 const buttonConfigs = [
   { icon: FiEdit, title: "Edit", modalType: "update" },
@@ -46,42 +48,55 @@ const CodePreviewCard = ({
   };
 
   return (
-    <div className="bg-white rounded-t-lg shadow-xl border border-gray-300 min-h-[500px] max-h-[700px] flex flex-col transition-transform transform hover:scale-105 hover:shadow-2xl duration-300">
-      {/* Header */}
-      <div className="p-4 flex items-center justify-between rounded-t-lg bg-primary border-b border-gray-200">
-        <h2 className="text-lg md:text-xl font-semibold text-white">{title}</h2>
-        <IconButton
-          className={`${
-            isCopied
-              ? "bg-white-100 text-green-600"
-              : "bg-white text-blue-600 hover:bg-blue-200"
-          }`}
-          icon={FiClipboard}
-          title="Edit"
-          onClick={handleCopy}
-        />
+    <div className="bg-primary rounded-lg shadow-xl border border-gray-300 scrollbar-hidden overflow-y-auto min-h-[300px] max-h-[500px] flex flex-col transition-transform transform  hover:shadow-2xl duration-300">
+      <div className="flex rounded-t-lg justify-between items-center px-4 py-1 text-white text-xs bg-primary">
+        <p className="text-lg font-bold">{title}</p>
+        {isCopied ? (
+          <button
+            onClick={handleCopy}
+            className="py-1 bg-transparent text-white font-bold cursor-pointer border-none outline-none inline-flex items-center justify-center gap-1 "
+          >
+            <span className="text-base mt-1">
+              <ion-icon name="checkmark-sharp"></ion-icon>
+            </span>
+            Copied!
+          </button>
+        ) : (
+          <button
+            onClick={handleCopy}
+            className="py-1 bg-transparent text-white font-bold cursor-pointer border-none outline-none inline-flex items-center justify-center gap-1 "
+          >
+            <span className="text-base mt-1">
+              <ion-icon name="clipboard-outline"></ion-icon>
+            </span>
+            Copy code
+          </button>
+        )}
       </div>
-
-      {/* Code Snippet */}
-      <div className="flex-grow p-4 overflow-x-auto bg-gray-900 rounded-md m-4">
-        <pre className="text-sm md:text-base text-gray-200 leading-snug">
-          <code>{codeSnippet}</code>
-        </pre>
-      </div>
+      <SyntaxHighlighter
+        language="jsx"
+        style={atomOneDark}
+        customStyle={{ padding: "25px" }}
+        wrapLongLines={true}
+      >
+        {`${codeSnippet}`}
+      </SyntaxHighlighter>
 
       {/* Description */}
-      <div className="p-4 border-t border-gray-200  ">
+      <div className="p-4 border-t text-white border-gray-200  ">
         <p className="text-grey-200 text-sm">{description}</p>
       </div>
 
       {/* Action Buttons */}
-      <div className="p-4 flex justify-between items-center border-t border-gray-200">
+      <div className="p-2 flex justify-between items-center rounded-b-lg border-b border-gray-200 bg-primary">
         {buttonConfigs.map(({ icon: Icon, title, modalType }) => (
           <IconButton
             key={modalType}
             icon={Icon}
             title={title}
-            className={"hover:scale-110 hover:font-bold"}
+            className={
+              "hover:scale-110 hover:font-bold bg-transparent text-white"
+            }
             onClick={() => handleOpenModal(modalType, id)}
           />
         ))}

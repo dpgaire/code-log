@@ -1,52 +1,30 @@
-import React, { useState } from "react";
-import { FiClipboard } from "react-icons/fi";
+To get the UI code card, you can take the reference and use this libarary.
 
-const CodePreviewCard = ({ title, codeSnippet, description }) => {
-const [isCopied, setIsCopied] = useState(false);
+And youtube video reference.
+https://www.youtube.com/watch?v=XxGMuoje1g0&ab_channel=CodeAProgram
 
-const handleCopy = () => {
-navigator.clipboard
-.writeText(codeSnippet)
-.then(() => {
-setIsCopied(true);
-setTimeout(() => setIsCopied(false), 2000);
-})
-.catch((err) => console.error("Failed to copy: ", err));
-};
+https://www.npmjs.com/package/react-syntax-highlighter
 
+How to use this.
+
+Steps to follow.
+
+1. Install the dependency.
+
+npm install react-syntax-highlighter --save
+
+2. How to use this.
+
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+const Component = () => {
+const codeString = '(num) => num + 1';
 return (
-
-<div className="bg-white shadow-lg rounded-lg overflow-hidden border border-gray-200 h-[400px] flex flex-col transition-transform transform hover:scale-105">
-<div className="p-4 flex items-center justify-between border-b border-gray-300">
-<h2 className="text-lg md:text-xl font-semibold text-gray-800">
-{title}
-</h2>
-<button
-onClick={handleCopy}
-className={`p-2 rounded-md focus:outline-none transition-colors duration-200 ${
-            isCopied ? "text-green-500" : "text-blue-500 hover:text-blue-600"
-          }`}
-title={isCopied ? "Copied!" : "Copy to clipboard"} >
-<FiClipboard className="w-5 h-5" />
-</button>
-</div>
-<div className=" w-full h-full p-4 overflow-auto">
-<pre className="bg-gray-900 text-gray-200 p-4 rounded-md w-full h-full">
-<code>{codeSnippet}</code>
-</pre>
-</div>
-<div className="p-4 border-t border-gray-300">
-<p className="text-gray-600 text-sm">{description}</p>
-</div>
-</div>
+<SyntaxHighlighter language="javascript" style={docco}>
+{codeString}
+</SyntaxHighlighter>
 );
 };
 
-export default CodePreviewCard;
-
-{
-id: 1,
-title: "Sample Code 1",
-description: "This is a sample code snippet for adding two numbers.",
-codeSnippet: "const add = (a, b) => a + b;\nconsole.log(add(2, 3));",
-},
+3. Update header color: #38414E
+4. Background color: #292C36
