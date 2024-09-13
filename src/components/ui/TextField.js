@@ -14,6 +14,7 @@ const TextField = ({
   return (
     <div style={style} className="flex flex-col space-y-2">
       <input
+        type={type}
         name={name}
         value={value}
         placeholder={placeholder}
@@ -34,7 +35,7 @@ TextField.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  onBlur: PropTypes.func.isRequired,
+  onBlur: PropTypes.func,
   error: PropTypes.string,
 };
 

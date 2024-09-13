@@ -1,18 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MainLayout } from "./layout";
-import { Card, IconButton, Modal, TextField } from "./components/ui";
-import {
-  AddCode,
-  CodePreviewCard,
-  DeleteConfirmation,
-  DynamicForm,
-  NoDataFound,
-} from "./components";
-import { FaPlus } from "react-icons/fa";
+import { SearchAndAdd } from "./components";
 import useToggle from "./hooks/useToggle";
-import { formConfig } from "./utlis/formConfig";
 import useLocalStorage from "./hooks/useLocalStorage";
-import CodePreviewComponent from "./components/code/CodePreviewComponent";
+import {
+  AddCodeModal,
+  ContentDisplay,
+  DeleteConfirmationModal,
+  DetailsModal,
+  UpdateCodeModal,
+} from "./components/code";
 
 const App = () => {
   const {
@@ -38,12 +35,13 @@ const App = () => {
     reset: detailsResetOpen,
   } = useToggle();
 
+  const { data, addData, updateData, deleteData, getDetails, refetch } =
+    useLocalStorage();
+
   const [itemToDelete, setItemToDelete] = useState(null);
   const [itemToUpdate, setItemToUpdate] = useState(null);
   const [detailId, setDetailId] = useState(null);
-
-  const { data, addData, updateData, deleteData, getDetails } =
-    useLocalStorage();
+  const [filteredData, setFilteredData] = useState(data);
 
   const handleFormSubmit = (data) => {
     addData(data);
@@ -73,6 +71,7 @@ const App = () => {
       deleteData(itemToDelete);
       setItemToDelete(null);
     }
+
     deleteResetOpen();
   };
 
@@ -80,89 +79,59 @@ const App = () => {
     detailsToggle();
     setDetailId(id);
     getDetails(id);
-    const detailsData = getDetails(id);
-    console.log("detailsData", detailsData);
   };
+
+  const handleSearchTermChange = (e) => {
+    const term = e.target.value;
+    handleSearch(term);
+  };
+
+  const handleSearch = (searchTerm = "") => {
+    const filterData = data.filter((item) =>
+      item.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredData(filterData);
+  };
+
+  useEffect(() => {
+    setFilteredData(data);
+  }, [data]);
 
   return (
     <MainLayout>
       <section className="p-4">
-        <div className="flex flex-wrap my-2 gap-2 items-center">
-          <TextField style={{ flex: 1 }} type="text" placeholder="Search..." />
-          <IconButton
-            className={` text-white bg-primary py-4 px-4 hover:scale-105 rounded-full`}
-            icon={FaPlus}
-            title="Add"
-            onClick={addToggle}
-          />
-        </div>
-        <div className="">
-          {data.length === 0 ? (
-            <NoDataFound message="No data at the moments do you want to add." />
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 my-4 py-2">
-              {data.map((item) => (
-                <CodePreviewCard
-                  key={item.id}
-                  id={item.id}
-                  title={item.title}
-                  description={item.description}
-                  codeSnippet={item.codeSnippet}
-                  handleUpdate={handleUpdate}
-                  handleDelete={handleDelete}
-                  handleDetils={handleDetils}
-                />
-              ))}
-            </div>
-          )}
-        </div>
-        <div className="p-6">
-          <Modal isOpen={addIsOpen} onClose={addResetOpen} title="Add Code">
-            <DynamicForm
-              config={formConfig}
-              onSubmit={handleFormSubmit}
-              onCancel={addResetOpen}
-              submitText="Add"
-            />
-          </Modal>
-        </div>
-        <div className="p-6">
-          <Modal
-            isOpen={updateIsOpen}
-            onClose={updateResetOpen}
-            title="Update Code"
-          >
-            <DynamicForm
-              initialData={getDetails(itemToUpdate)}
-              config={formConfig}
-              onSubmit={handleUpdateConfirm}
-              onCancel={updateResetOpen}
-              submitText="Update"
-            />
-          </Modal>
-        </div>
-        <div className="p-6">
-          <Modal
-            isOpen={detailsIsOpen}
-            onClose={detailsResetOpen}
-            title="Code Preview"
-          >
-            <CodePreviewComponent data={getDetails(detailId)} />
-          </Modal>
-        </div>
-        {/* <AddCode addData={addData} /> */}
-        <div className="p-6">
-          <Modal
-            isOpen={deleteIsOpen}
-            onClose={deleteResetOpen}
-            title="Confirm Deletion"
-          >
-            <DeleteConfirmation
-              onConfirm={handleDeleteConfirm}
-              onCancel={deleteResetOpen}
-            />
-          </Modal>
-        </div>
+        <SearchAndAdd
+          onSearchChange={handleSearchTermChange}
+          onAddClick={addToggle}
+        />
+        <ContentDisplay
+          data={data}
+          filteredData={filteredData}
+          handleUpdate={handleUpdate}
+          handleDelete={handleDelete}
+          handleDetils={handleDetils}
+        />
+        <AddCodeModal
+          isOpen={addIsOpen}
+          onClose={addResetOpen}
+          onSubmit={handleFormSubmit}
+        />
+        <UpdateCodeModal
+          isOpen={updateIsOpen}
+          onClose={updateResetOpen}
+          onSubmit={handleUpdateConfirm}
+          initialData={getDetails(itemToUpdate)}
+        />
+        <DetailsModal
+          isOpen={detailsIsOpen}
+          onClose={detailsResetOpen}
+          data={getDetails(detailId)}
+        />
+        <DeleteConfirmationModal
+          isOpen={deleteIsOpen}
+          onClose={deleteResetOpen}
+          onConfirm={handleDeleteConfirm}
+        />
       </section>
     </MainLayout>
   );

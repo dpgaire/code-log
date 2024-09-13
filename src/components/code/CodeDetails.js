@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-// import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
-const CodePreviewComponent = (data) => {
+const CodeDetails = (data) => {
   const [isCopied, setIsCopied] = useState(false);
   const { title, description, codeSnippet } = data.data;
-  console.log("data on preview", data);
 
   const handleCopy = () => {
     setIsCopied(true);
@@ -58,4 +56,4 @@ const CodePreviewComponent = (data) => {
   );
 };
 
-export default CodePreviewComponent;
+export default CodeDetails;

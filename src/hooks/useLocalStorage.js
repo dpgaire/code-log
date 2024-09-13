@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 const useLocalStorage = () => {
@@ -39,6 +39,12 @@ const useLocalStorage = () => {
     return data.find((item) => item.id === id);
   };
 
+  // Function to refetch data from localStorage
+  const refetch = useCallback(() => {
+    const savedData = localStorage.getItem("data");
+    setData(savedData ? JSON.parse(savedData) : []);
+  }, []);
+
   // Export data to a JSON file
   const exportDataToFile = () => {
     const blob = new Blob([JSON.stringify(data, null, 2)], {
@@ -58,6 +64,7 @@ const useLocalStorage = () => {
     updateData,
     deleteData,
     getDetails,
+    refetch,
     exportDataToFile,
   };
 };
