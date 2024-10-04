@@ -1,15 +1,23 @@
 {
   "name": "code-log",
-  "version": "0.1.0",
+  "version": "10.11.245",
   "private": true,
-  "main": "electron.js",
+  "author": {
+    "name": "Durga Gairhe",
+    "email": "gairhedurga13@gmail.com"
+  },
+  "description": "A fantastic code-log app",
+  "main": "./public/electron.js",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "electron-start": "electron .",
-    "electron-build": "electron-builder"
+    "electron-build": "electron-builder",
+    "electron:package:mac": "npm run build && electron-builder -m -c.extraMetadata.main=build/electron.js",
+    "electron:package:win": "npm run build && electron-builder -w -c.extraMetadata.main=build/electron.js",
+    "electron:package:linux": "npm run build && electron-builder -l -c.extraMetadata.main=build/electron.js"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
@@ -35,8 +43,24 @@
   "build": {
     "appId": "com.codelog.codelog",
     "productName": "Code Log",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
     "directories": {
-      "output": "dist"
+      "buildResources": "public"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "public/icons/icon.icns"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "public/icons/icon.ico"
+    },
+    "linux": {
+      "target": "deb",
+      "icon": "public/icons/icon.png"
     }
   },
   "eslintConfig": {
