@@ -34,12 +34,13 @@ const Modal = ({ isOpen, onClose, title = "", size = "lg", children }) => {
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div
         ref={modalRef}
+        // style={{maxWidth:`${size}`}}
         className={`bg-white rounded-lg shadow-lg w-full max-w-${size} ${
           title ? "p-6" : "p-2"
         }`}
       >
         <div
-          className={`flex ${
+          className={`flex  ${
             !title ? "justify-end" : "justify-between pb-3"
           } items-center border-b `}
         >
@@ -64,7 +65,7 @@ const Modal = ({ isOpen, onClose, title = "", size = "lg", children }) => {
             </svg>
           </button>
         </div>
-        <div className="mt-4">{children}</div>
+        <div className="mt-4 ">{children}</div>
       </div>
     </div>,
     document.body

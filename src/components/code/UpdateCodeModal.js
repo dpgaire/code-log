@@ -4,7 +4,7 @@ import { Modal } from "../ui";
 import { formConfig } from "../../utlis/formConfig";
 
 const UpdateCodeModal = ({ isOpen, onClose, onSubmit, initialData }) => (
-  <Modal isOpen={isOpen} onClose={onClose} title="Update Code">
+  <Modal isOpen={isOpen} onClose={onClose} size="2xl" title="Update Code">
     <DynamicForm
       initialData={initialData}
       config={formConfig}
