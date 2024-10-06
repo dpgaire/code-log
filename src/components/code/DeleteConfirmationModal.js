@@ -3,7 +3,7 @@ import { Modal } from "../ui";
 import DeleteConfirmation from "../DeleteConfirmation";
 
 const DeleteConfirmationModal = ({ isOpen, onClose, onConfirm }) => (
-  <Modal size="sm" isOpen={isOpen} onClose={onClose} title="Confirm Deletion">
+  <Modal size="md" isOpen={isOpen} onClose={onClose} title="Confirm Deletion">
     <DeleteConfirmation onConfirm={onConfirm} onCancel={onClose} />
   </Modal>
 );

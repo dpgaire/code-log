@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FiClipboard, FiEdit, FiTrash, FiEye } from "react-icons/fi";
+import { FiEdit, FiTrash, FiEye } from "react-icons/fi";
 import { IconButton } from "./ui";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";

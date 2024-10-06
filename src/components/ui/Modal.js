@@ -9,6 +9,16 @@ import ReactDOM from "react-dom";
  * @param {string} title - Title of the modal.
  * @param {React.ReactNode} children - Content of the modal.
  */
+
+// Size mapping for pixel widths
+const sizeMap = {
+  sm: { width: "300px" }, // Small size
+  md: { width: "600px" }, // Medium size
+  lg: { width: "800px" }, // Large size
+  xl: { width: "1000px" }, // Extra Large size
+  "2xl": { width: "1200px" }, // 2X Large size
+};
+
 const Modal = ({ isOpen, onClose, title = "", size = "lg", children }) => {
   const modalRef = useRef(null);
 
@@ -34,8 +44,11 @@ const Modal = ({ isOpen, onClose, title = "", size = "lg", children }) => {
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div
         ref={modalRef}
-        // style={{maxWidth:`${size}`}}
-        className={`bg-white rounded-lg shadow-lg w-full max-w-${size} ${
+        style={{
+          maxWidth: sizeMap[size].width,
+          width: "100%",
+        }}
+        className={`bg-white rounded-lg shadow-lg w-full ${
           title ? "p-6" : "p-2"
         }`}
       >
