@@ -54,9 +54,9 @@ const CodePreviewCard = ({
         {isCopied ? (
           <button
             onClick={handleCopy}
-            className="py-1 bg-transparent text-white font-bold cursor-pointer border-none outline-none inline-flex items-center justify-center gap-1 "
+            className="py-1 bg-transparent text-green-500 font-bold cursor-pointer border-none outline-none inline-flex items-center justify-center gap-1 "
           >
-            <span className="text-base mt-1">
+            <span className="text-base mt-1 text-green-500">
               <ion-icon name="checkmark-sharp"></ion-icon>
             </span>
             Copied!
