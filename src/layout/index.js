@@ -1,3 +1,5 @@
 import MainLayout from "./MainLayout";
+import Header from "./Header";
+import Footer from "./Footer";
 
-export { MainLayout };
+export { MainLayout, Header, Footer };
