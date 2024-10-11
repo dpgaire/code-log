@@ -10,6 +10,7 @@ import {
   DetailsModal,
   UpdateCodeModal,
 } from "./components/code";
+import { CodeListkeleton } from "./components/skeleton";
 
 const App = () => {
   const {
@@ -104,6 +105,7 @@ const App = () => {
           onSearchChange={handleSearchTermChange}
           onAddClick={addToggle}
         />
+        {/* <CodeListkeleton /> */}
         <ContentDisplay
           data={data}
           filteredData={filteredData}
