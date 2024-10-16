@@ -12,7 +12,7 @@ const TextField = ({
   style,
 }) => {
   return (
-    <div style={style} className="flex flex-col space-y-2">
+    <div style={style} className="flex flex-col space-y-2 font-sans">
       <input
         type={type}
         name={name}
@@ -20,11 +20,11 @@ const TextField = ({
         placeholder={placeholder}
         onChange={onChange}
         onBlur={onBlur}
-        className={` p-2 w-full outline-none rounded-lg sm:w-auto focus:outline-none focus:dark:bg-gray-50 focus:dark:border-sky-600 focus:focus text-lg  transition duration-150 ease-in-out  ${
-          error ? "border-red-500" : "border-DEFAULT"
+        className={` p-2 w-full font-sans rounded-lg shadow-sm sm:w-auto  focus:outline-none text-lg  transition duration-150 ease-in-out  ${
+          error ? "border-red-500" : ""
         }`}
       />
-      {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+      {error && <p className="text-red-500 text-sm mt-1 font-sans">{error}</p>}
     </div>
   );
 };

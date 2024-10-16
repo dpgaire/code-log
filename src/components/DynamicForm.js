@@ -88,13 +88,18 @@ const DynamicForm = ({
         return (
           <TextArea
             {...commonProps}
-            style={{ fontFamily: "monospace", whiteSpace: "pre-wrap" }}
+            style={{ fontFamily: "Poppins", whiteSpace: "pre-wrap" }}
           />
         );
       case "select":
         return <SelectField {...commonProps} options={field.options} />;
       default:
-        return <TextField {...commonProps} />;
+        return (
+          <TextField
+            {...commonProps}
+            style={{ fontFamily: "Poppins", whiteSpace: "pre-wrap" }}
+          />
+        );
     }
   };
 

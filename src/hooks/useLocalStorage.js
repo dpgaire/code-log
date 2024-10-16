@@ -45,6 +45,12 @@ const useLocalStorage = () => {
     setData(savedData ? JSON.parse(savedData) : []);
   }, []);
 
+  // Reset data to initial state
+  const resetData = () => {
+    localStorage.removeItem("data");
+    setData([]);
+  };
+
   // Export data to a JSON file
   const exportDataToFile = () => {
     const blob = new Blob([JSON.stringify(data, null, 2)], {
@@ -66,6 +72,7 @@ const useLocalStorage = () => {
     getDetails,
     refetch,
     exportDataToFile,
+    resetData,
   };
 };
 

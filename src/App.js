@@ -36,7 +36,7 @@ const App = () => {
     reset: detailsResetOpen,
   } = useToggle();
 
-  const { data, addData, updateData, deleteData, getDetails, refetch } =
+  const { data, addData, updateData, deleteData, getDetails, resetData } =
     useLocalStorage();
 
   const [itemToDelete, setItemToDelete] = useState(null);
@@ -99,7 +99,7 @@ const App = () => {
   }, [data]);
 
   return (
-    <MainLayout>
+    <MainLayout resetData={resetData}>
       <section className="p-4">
         <SearchAndAdd
           onSearchChange={handleSearchTermChange}
