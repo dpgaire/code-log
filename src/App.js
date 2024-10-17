@@ -55,7 +55,7 @@ const App = () => {
   };
 
   const handleUpdateConfirm = (data) => {
-    if (itemToDelete) {
+    if (itemToUpdate) {
       updateData(itemToUpdate, data);
       setItemToUpdate(null);
     }

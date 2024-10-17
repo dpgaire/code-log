@@ -52,19 +52,25 @@ const DynamicForm = ({
   };
 
   const handleBlur = (e) => {
-    const { name } = e.target;
-    validateField(name);
+    const { name, value } = e.target;
+    validateField(name, value);
   };
 
-  const validateField = (fieldName) => {
+  const validateField = (fieldName, fieldValue) => {
     const fieldConfig = config.find((field) => field.name === fieldName);
-    if (fieldConfig?.required && !formData[fieldName]) {
+    if (fieldConfig?.required && !fieldValue) {
       setErrors((prevErrors) => ({
         ...prevErrors,
-        [fieldName]: `${fieldConfig.label} is required`,
+        [fieldName]: `${fieldConfig.label} is required.`,
       }));
     }
   };
+
+  useEffect(() => {
+    if (initialData) {
+      setFormData(initialData);
+    }
+  }, [initialData]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
