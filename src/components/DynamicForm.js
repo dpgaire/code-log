@@ -86,6 +86,7 @@ const DynamicForm = ({
       value: formData[field.name] || formData[field.value],
       onChange: handleChange,
       onBlur: handleBlur,
+      type: field.type,
       error: errors[field.name],
     };
 

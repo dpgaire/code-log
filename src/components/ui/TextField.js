@@ -18,6 +18,7 @@ const TextField = ({
         name={name}
         value={value}
         placeholder={placeholder}
+        autoComplete="off"
         onChange={onChange}
         onBlur={onBlur}
         className={` p-2 w-full font-sans rounded-lg shadow-sm sm:w-auto  focus:outline-none text-lg  transition duration-150 ease-in-out  ${

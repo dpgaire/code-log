@@ -4,7 +4,7 @@ import ContentDisplay from "./ContentDisplay";
 import DeleteConfirmationModal from "./DeleteConfirmationModal";
 import DetailsModal from "./DetailsModal";
 import UpdateCodeModal from "./UpdateCodeModal";
-
+import LoginModal from "./LoginModal";
 export {
   AddCodeModal,
   CodeDetails,
@@ -12,4 +12,5 @@ export {
   DeleteConfirmationModal,
   DetailsModal,
   UpdateCodeModal,
+  LoginModal,
 };

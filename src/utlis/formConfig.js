@@ -26,4 +26,23 @@ const formConfig = [
   },
 ];
 
-export { formConfig };
+const loginConfig = [
+  {
+    name: "email",
+    label: "Email",
+    type: "text",
+    placeholder: "Your email",
+    fieldType: "input",
+    required: true,
+  },
+  {
+    name: "password",
+    label: "Password",
+    type: "password",
+    placeholder: "Your password",
+    fieldType: "input",
+    required: true,
+  },
+];
+
+export { formConfig, loginConfig };
