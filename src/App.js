@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { MainLayout } from "./layout";
 import { SearchAndAdd } from "./components";
-import useToggle from "./hooks/useToggle";
 import useLocalStorage from "./hooks/useLocalStorage";
 import {
   AddCodeModal,
@@ -11,33 +10,26 @@ import {
   UpdateCodeModal,
 } from "./components/code";
 import { CodeListkeleton } from "./components/skeleton";
+import { useModalContext } from "./context";
 
 const App = () => {
-  const {
-    state: addIsOpen,
-    toggle: addToggle,
-    reset: addResetOpen,
-  } = useToggle();
-  const {
-    state: deleteIsOpen,
-    toggle: deleteToggle,
-    reset: deleteResetOpen,
-  } = useToggle();
-
-  const {
-    state: updateIsOpen,
-    toggle: updateToggle,
-    reset: updateResetOpen,
-  } = useToggle();
-
-  const {
-    state: detailsIsOpen,
-    toggle: detailsToggle,
-    reset: detailsResetOpen,
-  } = useToggle();
-
   const { data, addData, updateData, deleteData, getDetails, resetData } =
     useLocalStorage();
+
+  const {
+    addIsOpen,
+    addToggle,
+    addResetOpen,
+    deleteIsOpen,
+    deleteToggle,
+    deleteResetOpen,
+    updateIsOpen,
+    updateToggle,
+    updateResetOpen,
+    detailsIsOpen,
+    detailsToggle,
+    detailsResetOpen,
+  } = useModalContext();
 
   const [itemToDelete, setItemToDelete] = useState(null);
   const [itemToUpdate, setItemToUpdate] = useState(null);

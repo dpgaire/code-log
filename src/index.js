@@ -4,12 +4,16 @@ import "./global.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import ErrorBoundary from "./components/ErrorBoundary";
+import { ModalProvider } from "./context";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <ErrorBoundary fallback={<p>Something went wrong</p>}>
-      <App />
+      <ModalProvider>
+        <App />
+      </ModalProvider>
+      ,
     </ErrorBoundary>
   </React.StrictMode>
 );

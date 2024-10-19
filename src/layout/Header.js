@@ -24,7 +24,6 @@ const Header = ({ resetData }) => {
       <Button
         className="ml-2"
         onClick={addToggle}
-        addToggle
         text="Login"
         variant="primary"
       />
