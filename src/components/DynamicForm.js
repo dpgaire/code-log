@@ -83,7 +83,7 @@ const DynamicForm = ({
     const commonProps = {
       name: field.name,
       placeholder: field.placeholder,
-      value: formData[field.name] || formData[field.value],
+      value: formData[field.name] || formData[field.value] || "",
       onChange: handleChange,
       onBlur: handleBlur,
       type: field.type,
