@@ -7,10 +7,13 @@ const CodeDetails = (data) => {
   const { title, description, codeSnippet } = data.data;
 
   const handleCopy = () => {
-    setIsCopied(true);
     navigator.clipboard
-      .writeText(data.codeSnippet)
-      .catch((err) => console.error("Failed to copy code: ", err));
+      .writeText(codeSnippet)
+      .then(() => {
+        setIsCopied(true);
+        setTimeout(() => setIsCopied(false), 2000);
+      })
+      .catch((err) => console.error("Failed to copy: ", err));
   };
 
   return (
