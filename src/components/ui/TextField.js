@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 
 const TextField = ({
@@ -10,10 +10,20 @@ const TextField = ({
   onBlur,
   error,
   style,
+  autoFocus = false,
 }) => {
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (autoFocus) {
+      inputRef.current.focus();
+    }
+  }, [autoFocus]);
+
   return (
     <div style={style} className="flex flex-col space-y-2 font-sans">
       <input
+        ref={inputRef}
         type={type}
         name={name}
         value={value}
@@ -21,7 +31,7 @@ const TextField = ({
         autoComplete="off"
         onChange={onChange}
         onBlur={onBlur}
-        className={` p-2 w-full font-sans rounded-lg shadow-sm sm:w-auto  focus:outline-none text-lg  transition duration-150 ease-in-out  ${
+        className={`p-2 w-full font-sans rounded-lg shadow-sm sm:w-auto focus:outline-none text-lg transition duration-150 ease-in-out ${
           error ? "border-red-500" : ""
         }`}
       />
@@ -38,6 +48,7 @@ TextField.propTypes = {
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func,
   error: PropTypes.string,
+  autoFocus: PropTypes.bool,
 };
 
 export default TextField;

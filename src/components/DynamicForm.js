@@ -104,6 +104,7 @@ const DynamicForm = ({
         return (
           <TextField
             {...commonProps}
+            autoFocus={true}
             style={{ fontFamily: "Poppins", whiteSpace: "pre-wrap" }}
           />
         );

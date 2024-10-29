@@ -10,6 +10,7 @@ const SearchAndAdd = ({ onSearchChange, onAddClick }) => (
       type="text"
       name="search"
       placeholder="Search..."
+      autoFocus={true}
     />
     <IconButton
       className="text-white bg-primary py-4 px-4 hover:scale-105 rounded-full"
