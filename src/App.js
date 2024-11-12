@@ -13,8 +13,15 @@ import { CodeListkeleton } from "./components/skeleton";
 import { useModalContext } from "./context";
 
 const App = () => {
-  const { data, addData, updateData, deleteData, getDetails, resetData } =
-    useLocalStorage();
+  const {
+    data,
+    addData,
+    updateData,
+    deleteData,
+    getDetails,
+    resetData,
+    exportDataToFile,
+  } = useLocalStorage();
 
   const {
     addIsOpen,
@@ -91,7 +98,7 @@ const App = () => {
   }, [data]);
 
   return (
-    <MainLayout resetData={resetData}>
+    <MainLayout resetData={resetData} exportDataToFile={exportDataToFile}>
       <section className="p-4">
         <SearchAndAdd
           onSearchChange={handleSearchTermChange}

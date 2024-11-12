@@ -3,7 +3,7 @@ import { Button } from "../components/ui";
 import useToggle from "../hooks/useToggle";
 import { LoginModal } from "../components/code";
 
-const Header = ({ resetData }) => {
+const Header = ({ resetData, exportDataToFile }) => {
   const {
     state: addIsOpen,
     toggle: addToggle,
@@ -21,17 +21,23 @@ const Header = ({ resetData }) => {
         Codelog
       </span>
       <Button onClick={() => resetData()} text="Reset All" variant="danger" />
-      <Button
+      {/* <Button
         className="ml-2"
         onClick={addToggle}
         text="Login"
         variant="primary"
+      /> */}
+      <Button
+        className="ml-2"
+        onClick={() => exportDataToFile()}
+        text="Export"
+        variant="primary"
       />
-      <LoginModal
+      {/* <LoginModal
         isOpen={addIsOpen}
         onClose={addResetOpen}
         onSubmit={handleFormSubmit}
-      />
+      /> */}
     </div>
   );
 };

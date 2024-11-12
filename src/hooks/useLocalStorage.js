@@ -53,13 +53,14 @@ const useLocalStorage = () => {
 
   // Export data to a JSON file
   const exportDataToFile = () => {
+    const currentDate = new Date().toISOString().split("T")[0];
     const blob = new Blob([JSON.stringify(data, null, 2)], {
       type: "application/json",
     });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "data.json";
+    a.download = `${currentDate}-code-log.json`;
     a.click();
     URL.revokeObjectURL(url); // Clean up after download
   };
