@@ -21,6 +21,7 @@ const App = () => {
     getDetails,
     resetData,
     exportDataToFile,
+    importDataFromFile,
   } = useLocalStorage();
 
   const {
@@ -98,7 +99,11 @@ const App = () => {
   }, [data]);
 
   return (
-    <MainLayout resetData={resetData} exportDataToFile={exportDataToFile}>
+    <MainLayout
+      resetData={resetData}
+      exportDataToFile={exportDataToFile}
+      importDataFromFile={importDataFromFile}
+    >
       <section className="p-4">
         <SearchAndAdd
           onSearchChange={handleSearchTermChange}

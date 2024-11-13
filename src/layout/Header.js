@@ -1,14 +1,30 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Button } from "../components/ui";
 import useToggle from "../hooks/useToggle";
 import { LoginModal } from "../components/code";
 
-const Header = ({ resetData, exportDataToFile }) => {
+const Header = ({ resetData, exportDataToFile, importDataFromFile }) => {
   const {
     state: addIsOpen,
     toggle: addToggle,
     reset: addResetOpen,
   } = useToggle();
+
+  // Reference to the hidden file input element
+  const fileInputRef = useRef(null);
+
+  // Handle file selection
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      importDataFromFile(file); // Call importDataFromFile with the selected file
+    }
+  };
+
+  // Handle button click to trigger file input
+  const handleImportClick = () => {
+    fileInputRef.current.click(); // Trigger the hidden file input click event
+  };
 
   const handleFormSubmit = (data) => {
     console.log("data", data);
@@ -33,6 +49,21 @@ const Header = ({ resetData, exportDataToFile }) => {
         text="Export"
         variant="primary"
       />
+      <Button
+        className="ml-2"
+        onClick={handleImportClick}
+        text="Import"
+        variant="primary"
+      />
+      {/* Hidden file input to select a file */}
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".json" // Only allow JSON files
+        style={{ display: "none" }} // Make it invisible
+        onChange={handleFileChange} // Handle the file selection
+      />
+
       {/* <LoginModal
         isOpen={addIsOpen}
         onClose={addResetOpen}
