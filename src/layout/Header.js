@@ -32,10 +32,8 @@ const Header = ({ resetData, exportDataToFile, importDataFromFile }) => {
   };
 
   return (
-    <div className="bg-primary font-sans w-full tracking-widest text-white p-2 flex justify-center items-center">
-      <span className="lg:text-4xl md:text-2xl flex-1 text-center">
-        Codelog
-      </span>
+    <div className="bg-primary font-sans w-full tracking-widest text-white p-2 flex justify-center items-center sticky top-0 z-20">
+      <span className="lg:text-4xl md:text-2xl flex-1 ">Codelog</span>
       <Button onClick={() => resetData()} text="Reset All" variant="danger" />
       {/* <Button
         className="ml-2"

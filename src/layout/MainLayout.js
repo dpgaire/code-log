@@ -8,7 +8,7 @@ const MainLayout = ({
   children,
 }) => {
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen relative ">
       <Header
         resetData={resetData}
         exportDataToFile={exportDataToFile}
