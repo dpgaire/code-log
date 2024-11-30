@@ -1,7 +1,5 @@
-import React, { useState } from "react";
-import { AiOutlineDelete } from "react-icons/ai";
+import React from "react";
 import { Button } from "./ui";
-// import { motion } from "framer-motion";
 
 const DeleteConfirmation = ({ onConfirm, onCancel }) => {
   return (
