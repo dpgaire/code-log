@@ -1,105 +1,82 @@
 import React, { useState } from "react";
-import { FiEdit, FiTrash, FiEye } from "react-icons/fi";
-import { IconButton } from "./ui";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
-const buttonConfigs = [
-  { icon: FiEdit, title: "Edit", modalType: "update" },
-  { icon: FiTrash, title: "Delete", modalType: "delete" },
-  { icon: FiEye, title: "Preview", modalType: "preview" },
-];
+const CodePreviewCard = ({ codeSnippet, handleUpdate }) => {
+  const [editableCode, setEditableCode] = useState(codeSnippet);
+  const [isEditing, setIsEditing] = useState(false);
 
-const CodePreviewCard = ({
-  id,
-  title,
-  codeSnippet,
-  description,
-  handleUpdate,
-  handleDelete,
-  handleDetils,
-}) => {
-  const [isCopied, setIsCopied] = useState(false);
-
-  const handleCopy = () => {
-    navigator.clipboard
-      .writeText(codeSnippet)
-      .then(() => {
-        setIsCopied(true);
-        setTimeout(() => setIsCopied(false), 2000);
-      })
-      .catch((err) => console.error("Failed to copy: ", err));
+  const handleCodeChange = (event) => {
+    setEditableCode(event.target.value);
   };
 
-  const handleOpenModal = (modalType, id) => {
-    switch (modalType) {
-      case "update":
-        handleUpdate(id);
-        break;
-      case "delete":
-        handleDelete(id);
-        break;
-      case "preview":
-        handleDetils(id);
-        break;
-      default:
-        break;
+  const toggleEditing = () => {
+    if (isEditing) {
+      handleUpdate(editableCode);
     }
+    setIsEditing(!isEditing);
   };
 
   return (
-    <div className="bg-primary rounded-lg shadow-xl border border-gray-300 scrollbar-hidden overflow-y-auto min-h-[300px] max-h-[500px] flex flex-col transition-transform transform  hover:shadow-2xl duration-300">
-      <div className="flex rounded-t-lg justify-between items-center px-4 py-1 text-white text-xs bg-primary">
-        <p className="text-lg font-bold">{title}</p>
-        {isCopied ? (
+    <div className="bg-gray-900 rounded-lg shadow-md border border-gray-700 flex flex-col overflow-hidden w-full">
+      {/* Code Editor Area */}
+      <div className="relative flex">
+        {/* Line Numbers */}
+        <div className="bg-gray-800 text-gray-400 text-sm flex flex-col items-end py-3 px-2 overflow-hidden">
+          {Array.from({ length: editableCode.split("\n").length }).map((_, i) => (
+            <span key={i} className="pr-2">{i + 1}</span>
+          ))}
+        </div>
+        {/* Code Section */}
+        <div
+          className="flex-1 bg-gray-900 "
+          // style={{ maxHeight: "400px" }}
+          onClick={toggleEditing}
+        >
+          {isEditing ? (
+            <textarea
+              value={editableCode}
+              onChange={handleCodeChange}
+              className="w-full h-full bg-gray-900 text-gray-200 text-sm p-4 font-mono outline-none resize-none"
+              spellCheck={false}
+            />
+          ) : (
+            <SyntaxHighlighter
+              language="javascript"
+              style={atomOneDark}
+              customStyle={{
+                padding: "15px",
+                margin: 0,
+                background: "transparent",
+                overflowX: "auto",
+              }}
+              wrapLongLines={true}
+              lineProps={{
+                style: { wordBreak: "break-word", whiteSpace: "pre-wrap" },
+              }}
+            >
+              {editableCode}
+            </SyntaxHighlighter>
+          )}
+        </div>
+      </div>
+
+      {/* Action Bar */}
+      <div className="flex items-center justify-between bg-gray-800 px-4 py-3 border-t border-gray-700">
+        <button
+          onClick={toggleEditing}
+          className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-500"
+        >
+          {isEditing ? "Save" : "Edit"}
+        </button>
+        {!isEditing && (
           <button
-            onClick={handleCopy}
-            className="py-1 bg-transparent text-green-500 font-bold cursor-pointer border-none outline-none inline-flex items-center justify-center gap-1 "
+            onClick={() => navigator.clipboard.writeText(editableCode)}
+            className="px-4 py-2 text-sm font-medium text-gray-400 rounded hover:text-white"
           >
-            <span className="text-base mt-1 text-green-500">
-              <ion-icon name="checkmark-sharp"></ion-icon>
-            </span>
-            Copied!
-          </button>
-        ) : (
-          <button
-            onClick={handleCopy}
-            className="py-1 bg-transparent text-white font-bold cursor-pointer border-none outline-none inline-flex items-center justify-center gap-1 "
-          >
-            <span className="text-base mt-1">
-              <ion-icon name="clipboard-outline"></ion-icon>
-            </span>
-            Copy code
+            Copy
           </button>
         )}
-      </div>
-      <SyntaxHighlighter
-        language="jsx"
-        style={atomOneDark}
-        customStyle={{ padding: "25px" }}
-        wrapLongLines={true}
-      >
-        {`${codeSnippet}`}
-      </SyntaxHighlighter>
-
-      {/* Description */}
-      <div className="p-4 border-t text-white border-gray-200  ">
-        <p className="text-grey-200 text-sm">{description}</p>
-      </div>
-
-      {/* Action Buttons */}
-      <div className="p-2 flex justify-between items-center rounded-b-lg border-b border-gray-200 bg-primary">
-        {buttonConfigs.map(({ icon: Icon, title, modalType }) => (
-          <IconButton
-            key={modalType}
-            icon={Icon}
-            title={title}
-            className={
-              "hover:scale-110 hover:font-bold bg-transparent text-white"
-            }
-            onClick={() => handleOpenModal(modalType, id)}
-          />
-        ))}
       </div>
     </div>
   );
