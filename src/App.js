@@ -116,6 +116,7 @@ const App = () => {
           handleUpdate={handleUpdate}
           handleDelete={handleDelete}
           handleDetils={handleDetils}
+          handleUpdateConfirm={handleUpdateConfirm}
         />
         <AddCodeModal
           isOpen={addIsOpen}

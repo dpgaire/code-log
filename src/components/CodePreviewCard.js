@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { Button } from "./ui";
 
-const CodePreviewCard = ({ codeSnippet, handleUpdate }) => {
+const CodePreviewCard = ({ codeSnippet, handleUpdate,handleUpdateConfirm }) => {
   const [editableCode, setEditableCode] = useState(codeSnippet);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -63,19 +64,20 @@ const CodePreviewCard = ({ codeSnippet, handleUpdate }) => {
 
       {/* Action Bar */}
       <div className="flex items-center justify-between bg-gray-800 px-4 py-3 border-t border-gray-700">
-        <button
-          onClick={toggleEditing}
-          className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-500"
-        >
-          {isEditing ? "Save" : "Edit"}
-        </button>
+      <Button
+        className="ml-2"
+        onClick={toggleEditing}
+        text= {isEditing ? "Save" : "Edit"}
+        variant="primary"
+      />
         {!isEditing && (
-          <button
-            onClick={() => navigator.clipboard.writeText(editableCode)}
-            className="px-4 py-2 text-sm font-medium text-gray-400 rounded hover:text-white"
-          >
-            Copy
-          </button>
+          <Button
+          className="ml-2"
+          onClick={() => navigator.clipboard.writeText(editableCode)}
+          text= "Copy"
+          variant="primary"
+        />
+  
         )}
       </div>
     </div>
