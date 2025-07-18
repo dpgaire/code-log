@@ -23,6 +23,15 @@
   --border-color-focus: #93C5FD;
 }
 
+.dark {
+  --color-primary: #1a202c;
+  --color-secondary: #2d3748;
+  --color-accent: #f6ad55;
+  --color-background: #1a202c;
+  --border-color-default: #2d3748;
+  --border-color-focus: #f6ad55;
+}
+
 /* Resetting padding, margin, and box-sizing */
 *,
 *::before,

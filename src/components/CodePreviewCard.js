@@ -1,8 +1,12 @@
 import React, { useState } from "react";
-import { FiEdit, FiTrash, FiEye } from "react-icons/fi";
+import { FiEdit, FiTrash, FiEye, FiClipboard, FiCheck } from "react-icons/fi";
 import { IconButton } from "./ui";
 import SyntaxHighlighter from "react-syntax-highlighter";
-import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import {
+  atomOneDark,
+  atomOneLight,
+} from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { useThemeContext } from "../context/ThemeContext";
 
 const buttonConfigs = [
   { icon: FiEdit, title: "Edit", modalType: "update" },
@@ -19,6 +23,7 @@ const CodePreviewCard = ({
   handleDelete,
   handleDetils,
 }) => {
+  const { theme } = useThemeContext();
   const [isCopied, setIsCopied] = useState(false);
 
   const handleCopy = () => {
@@ -48,56 +53,45 @@ const CodePreviewCard = ({
   };
 
   return (
-    <div className="bg-primary rounded-lg shadow-xl border border-gray-300 scrollbar-hidden overflow-y-auto min-h-[300px] max-h-[500px] flex flex-col transition-transform transform  hover:shadow-2xl duration-300">
-      <div className="flex rounded-t-lg justify-between items-center px-4 py-1 text-white text-xs bg-primary">
-        <p className="text-lg font-bold">{title}</p>
-        {isCopied ? (
-          <button
+    <div className="bg-secondary rounded-lg shadow-lg border border-default flex flex-col transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-2xl">
+      <div className="flex justify-between items-center px-4 py-2 bg-primary rounded-t-lg">
+        <h3 className="text-lg font-bold text-white">{title}</h3>
+        <div className="flex items-center">
+          <IconButton
+            icon={isCopied ? FiCheck : FiClipboard}
+            title={isCopied ? "Copied!" : "Copy code"}
             onClick={handleCopy}
-            className="py-1 bg-transparent text-green-500 font-bold cursor-pointer border-none outline-none inline-flex items-center justify-center gap-1 "
-          >
-            <span className="text-base mt-1 text-green-500">
-              <ion-icon name="checkmark-sharp"></ion-icon>
-            </span>
-            Copied!
-          </button>
-        ) : (
-          <button
-            onClick={handleCopy}
-            className="py-1 bg-transparent text-white font-bold cursor-pointer border-none outline-none inline-flex items-center justify-center gap-1 "
-          >
-            <span className="text-base mt-1">
-              <ion-icon name="clipboard-outline"></ion-icon>
-            </span>
-            Copy code
-          </button>
-        )}
+            className="text-white hover:text-accent"
+          />
+        </div>
       </div>
-      <SyntaxHighlighter
-        language="jsx"
-        style={atomOneDark}
-        customStyle={{ padding: "25px" }}
-        wrapLongLines={true}
-      >
-        {`${codeSnippet}`}
-      </SyntaxHighlighter>
-
-      {/* Description */}
-      <div className="p-4 border-t text-white border-gray-200  ">
-        <p className="text-grey-200 text-sm">{description}</p>
+      <div className="p-4 overflow-auto" style={{ maxHeight: "300px" }}>
+        <SyntaxHighlighter
+          language="jsx"
+          style={theme === "dark" ? atomOneDark : atomOneLight}
+          customStyle={{
+            borderRadius: "0.5rem",
+            padding: "1rem",
+            fontSize: "0.875rem",
+          }}
+          wrapLongLines={true}
+        >
+          {`${codeSnippet}`}
+        </SyntaxHighlighter>
       </div>
-
-      {/* Action Buttons */}
-      <div className="p-2 flex justify-between items-center rounded-b-lg border-b border-gray-200 bg-primary">
+      <div className="p-4 border-t border-default">
+        <p className="text-sm text-gray-500 dark:text-gray-400">
+          {description}
+        </p>
+      </div>
+      <div className="flex justify-end items-center p-2 bg-primary rounded-b-lg">
         {buttonConfigs.map(({ icon: Icon, title, modalType }) => (
           <IconButton
             key={modalType}
             icon={Icon}
             title={title}
-            className={
-              "hover:scale-110 hover:font-bold bg-transparent text-white"
-            }
             onClick={() => handleOpenModal(modalType, id)}
+            className="text-white hover:text-accent"
           />
         ))}
       </div>
