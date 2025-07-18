@@ -13,7 +13,7 @@ const ContentDisplay = ({
     {filteredData.length === 0 ? (
       <NoDataFound message="No data at the moment. Try again or add" />
     ) : (
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 my-4 py-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 my-4 py-2">
         {(filteredData || data).map((item) => (
           <CodePreviewCard
             key={item.id}
